@@ -1,0 +1,96 @@
+<div  class="wrapper default-theme">
+  <app-navbar></app-navbar>
+  <main>
+    <app-sidebar></app-sidebar>
+    <div class="pages container-fluid pt-4 pb-4 pl-4 pr-4 ">
+<!--       Dashboard User list start 
+ -->
+     <div class="row">
+      <div class="col-md-8" >
+             <h4 class="text-muted mb-4">Tables </h4>
+          </div>
+       <div class="col-md-4 " style="width:200px">
+              <input type="text" [(ngModel)]="searchString" class="form-control" placeholder="Search">
+        </div>
+      </div>
+       <div>
+        
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card border-0 rounded-0">
+              <div class="card-title mb-1 p-3">
+                <h5>User Details table</h5>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive-md">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Serial</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                       <tr *ngFor="let user of users | filter : searchString | paginate: { itemsPerPage: t, currentPage: p }; let i = index">
+                          <th scope="row">{{t*(p-1)+(i+1)}}</th>
+                          <td><strong>{{user.name}}</strong></td>
+                          <td>{{user.email}}</td>
+                          <td>{{user.phone}}</td>
+                          <td><a class="btn btn-sm btn-info" (click)="showDetail(user._id)"> 
+                            <span style="color: white">Details</span></a> </td>
+
+                          <td>
+                          <a class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                            <i class="far fa-edit"></i>
+                          </a>
+                          <a class="btn btn-sm btn-outline-lightning rounded-0">
+                            <i class="far fa-trash-alt"></i>
+                          </a>
+                        </td>
+
+                        </tr>
+                      
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div> 
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+           
+       </div>
+<!-- User list ends
+ -->
+      <hr>
+      <app-footer></app-footer>
+    </div>
+    <div class="overlay" (click)="toggleSidebar()"></div>
+  </main>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- 
+ <td>
+                          <a class="btn btn-sm btn-outline-lightning rounded-0 mr-2 ">
+                            <i class="far fa-edit"></i>
+                          </a>
+                          <a class="btn btn-sm btn-outline-lightning rounded-0">
+                            <i class="far fa-trash-alt"></i>
+                          </a>
+                        </td> -->
